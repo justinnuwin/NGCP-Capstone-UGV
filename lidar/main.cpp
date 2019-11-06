@@ -206,7 +206,7 @@ int main(int argc, const char * argv[]) {
         size_t   count = _countof(nodes);
 
         op_result = drv->grabScanData(nodes, count);
-
+        
         if (IS_OK(op_result)) {
             drv->ascendScanData(nodes, count);
             printf("\n");
@@ -220,6 +220,7 @@ int main(int argc, const char * argv[]) {
         if (ctrl_c_pressed){ 
             break;
         }
+        break;  //manaul break to get one revolution of data
     }
 
     drv->stop();
