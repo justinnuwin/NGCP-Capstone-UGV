@@ -1,3 +1,6 @@
 [submodule "lidar/rplidar_sdk"]
 	path = lidar/rplidar_sdk
 	url = git@github.com:Slamtec/rplidar_sdk.git
+[submodule "lidar/driver/rplidar_sdk"]
+	path = lidar/driver/rplidar_sdk
+	url = https://github.com/Slamtec/rplidar_sdk.git
