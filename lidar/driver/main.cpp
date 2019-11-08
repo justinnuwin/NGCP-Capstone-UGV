@@ -82,6 +82,7 @@ void ctrlc(int)
 }
 
 int main(int argc, const char * argv[]) {
+    int counter;
     const char * opt_com_path = NULL;
     _u32         baudrateArray[2] = {115200, 256000};
     _u32         opt_com_baudrate = 0;
@@ -199,9 +200,11 @@ int main(int argc, const char * argv[]) {
     // start scan...
     drv->startScan(0,1);
 
+	 counter = 10;
+
     // fetech result and print it out...
     printf("theta,dist\n"); 
-    while (1) {
+    while (counter >= 0) {
         rplidar_response_measurement_node_t nodes[8192];
         size_t   count = _countof(nodes);
 
@@ -209,7 +212,7 @@ int main(int argc, const char * argv[]) {
         
         if (IS_OK(op_result)) {
             drv->ascendScanData(nodes, count);
-            printf("\n");
+            //printf("\n");
             for (int pos = 0; pos < (int)count ; ++pos) {
                 printf("%03.2f, %08.2f\n", 
                     (nodes[pos].angle_q6_checkbit >> RPLIDAR_RESP_MEASUREMENT_ANGLE_SHIFT)/64.0f,
@@ -220,7 +223,8 @@ int main(int argc, const char * argv[]) {
         if (ctrl_c_pressed){ 
             break;
         }
-        break;  //manaul break to get one revolution of data
+		  counter--;
+        //break;  //manaul break to get one revolution of data
     }
 
     drv->stop();
