@@ -10,7 +10,7 @@ ARCH:=$(shell uname -s)
 SDK_ROOT:=./rplidar_sdk/sdk
 SDK_INSTALL_PATH:=/usr/local
 
-.PHONY: sdk install_sdk uninstall_sdk
+.PHONY: sdk install_sdk uninstall_sdk clean
 
 sdk:
 	git submodule update --init rplidar_sdk
@@ -26,3 +26,5 @@ uninstall_sdk:
 	rm $(SDK_INSTALL_PATH)/lib/librplidar_sdk.a
 	rm -rf $(SDK_INSTALL_PATH)/include/rplidar/
 
+clean:
+	rm lidar_driver
