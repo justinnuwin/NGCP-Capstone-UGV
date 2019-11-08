@@ -27,7 +27,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-#include "rplidar.h" //RPLIDAR standard sdk, all-in-one header
+#include <rplidar/rplidar.h> //RPLIDAR standard sdk, all-in-one header
 
 #ifndef _countof
 #define _countof(_Array) (int)(sizeof(_Array) / sizeof(_Array[0]))

@@ -1,6 +1,7 @@
 import matplotlib.pyplot as plt
 import numpy
 import pandas as pd
+import sys
 
 data = pd.read_csv("data1.csv")
 print(data)
@@ -18,6 +19,8 @@ for i in range(0, len(indices) - 1):
     tempData['rad']  = tempData['theta'] * 3.14 / 180
     fig = plt.figure()
     ax = fig.add_subplot(111, projection='polar')
+    ax.set_theta_zero_location("N")
+    ax.set_theta_direction(-1)
     c = ax.scatter(tempData['rad'], tempData['dist'], s = 1)
     a += 1
 plt.show()
