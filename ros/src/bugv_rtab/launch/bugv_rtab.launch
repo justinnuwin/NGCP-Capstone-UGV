@@ -36,18 +36,24 @@ OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
     </group>
 
     <group ns="rplidar">
+        <!-- RP-LiDAR -->
+        <include file="$(find rplidar_ros)/launch/rplidar.launch" />
     </group>
+
+
   
     <!-- RTAB-map Node-->
     <include file="$(find rtabmap_ros)/launch/rtabmap.launch">
       <arg name="rtabmap_args"                  value="--delete_db_on_start" />
-      <arg name="rgb_topic"               	value="/$(arg zed_namespace)/$(arg zed_node_name)/rgb/image_rect_color" />
-      <arg name="depth_topic"             	value="/$(arg zed_namespace)/$(arg zed_node_name)/depth/depth_registered" />
-      <arg name="camera_info_topic"       	value="/$(arg zed_namespace)/$(arg zed_node_name)/rgb/camera_info" />
-      <arg name="depth_camera_info_topic" 	value="/$(arg zed_namespace)/$(arg zed_node_name)/depth/camera_info" />
+      <arg name="rgb_topic"               	    value="/$(arg zed_namespace)/$(arg zed_node_name)/rgb/image_rect_color" />
+      <arg name="depth_topic"             	    value="/$(arg zed_namespace)/$(arg zed_node_name)/depth/depth_registered" />
+      <arg name="camera_info_topic"       	    value="/$(arg zed_namespace)/$(arg zed_node_name)/rgb/camera_info" />
+      <arg name="depth_camera_info_topic" 	    value="/$(arg zed_namespace)/$(arg zed_node_name)/depth/camera_info" />
+      <arg name="subscribe_scan"                value="true" />
+      <arg name="scan_topic"                    value="/scan" />
       <arg name="frame_id"                      value="base_link" />
-      <arg name="approx_sync"                   value="false" />
-      <arg name="visual_odometry"               value="false" />
+      <arg name="approx_sync"                   value="true" />
+      <arg name="visual_odometry"               value="true" />
       <arg name="odom_topic"                    value="/$(arg zed_namespace)/$(arg zed_node_name)/odom" />
       <arg name="rviz"                          value="true" />
     </include>
