@@ -13,9 +13,12 @@
         </include>
     </group>
 
-    <group ns="rplidar">
+    <arg name="rplidar_ns"    value="rplidar" />
+    <arg name="rplidar_node_name" value="rplidar_node" />
+
+    <group ns="$(arg rplidar_ns)">
         <!--<include file="$(find rplidar_ros)/launch/rplidar.launch" />-->
-        <node name="rplidarNode"          pkg="rplidar_ros"  type="rplidarNode" output="screen">
+        <node name="$(arg rplidar_node_name)"          pkg="rplidar_ros"  type="rplidarNode" output="screen">
         <param name="serial_port"         type="string" value="/dev/ttyUSB0"/>
         <param name="serial_baudrate"     type="int"    value="115200"/>
         <param name="frame_id"            type="string" value="lidar_frame"/>
@@ -34,12 +37,12 @@
   
     <include file="$(find rtabmap_ros)/launch/rtabmap.launch">
       <arg name="rtabmap_args"                  value="--delete_db_on_start" />
-      <arg name="rgb_topic"               	value="/$(arg zed_namespace)/$(arg zed_node_name)/rgb/image_rect_color" />
-      <arg name="depth_topic"             	value="/$(arg zed_namespace)/$(arg zed_node_name)/depth/depth_registered" />
-      <arg name="camera_info_topic"       	value="/$(arg zed_namespace)/$(arg zed_node_name)/rgb/camera_info" />
-      <arg name="depth_camera_info_topic" 	value="/$(arg zed_namespace)/$(arg zed_node_name)/depth/camera_info" />
-      <!--<arg name="subscribe_scan"                value="true" />
-      <arg name="scan_topic"                    value="/scan" />-->
+      <arg name="rgb_topic"               	value="/$(arg zed_ns)/$(arg zed_node_name)/rgb/image_rect_color" />
+      <arg name="depth_topic"             	value="/$(arg zed_ns)/$(arg zed_node_name)/depth/depth_registered" />
+      <arg name="camera_info_topic"       	value="/$(arg zed_ns)/$(arg zed_node_name)/rgb/camera_info" />
+      <arg name="depth_camera_info_topic" 	value="/$(arg zed_ns)/$(arg zed_node_name)/depth/camera_info" />
+      <arg name="subscribe_scan"                value="true" />
+      <arg name="scan_topic"                    value="/$(arg rplidar_ns)/$(arg rplidar_node_name)/scan" />
       <arg name="frame_id"                      value="base_link" />
       <arg name="approx_sync"                   value="true" />
       <arg name="visual_odometry"               value="false" />
