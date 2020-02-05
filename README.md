@@ -8,6 +8,7 @@ CPE Capstone 350-450
 ROS:
 - rplidar_ros
 - zed-ros-wrapper
+    - robot_state_publisher
 - mavros (mavlink)
 
 ## ROS Project Setup
