@@ -1,0 +1,31 @@
+<?xml version="1.0"?>
+
+<robot name="bugv">
+    <link name="base_link"/>
+
+    <joint name="zed_joint" type="fixed">
+        <origin xyz="0.16 0.085 0.02" rpy="0 0 0"/>
+        <parent link="base_link"/>
+        <child link="zed_description"/>
+    </joint>
+
+    <link name="zed_description"/>
+
+    <joint name="lidar_joint" type="fixed">
+        <origin xyz="0.105 -0.105 0.03" rpy="0 0 0"/>
+        <parent link="base_link"/>
+        <child link="lidar_frame"/>
+    </joint>
+
+    <link name="lidar_frame"/>
+
+    <joint name="px4_joint" type="fixed">
+        <!-- TODO: Check rotation -->
+        <origin xyz="-0.08 0 0" rpy="0 0 -1.5707963267"/>
+        <parent link="base_link"/>
+        <child link="px4_frame"/>
+    </joint>
+
+    <link name="px4_frame"/>
+
+</robot>

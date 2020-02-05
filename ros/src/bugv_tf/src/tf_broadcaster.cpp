@@ -19,11 +19,6 @@ int main(int argc, char** argv){
                                                              "base_link", "lidar"));
         // zed_camera.launch -> zed_state_publisher
         broadcaster.sendTransform(StampedTransform(Transform(Quaternion(0, 0, 0, 1), 
-                                                             Vector3(0, 0, 0)),
-                                                             ros::Time::now(),
-                                                             "base_link", "robot_description"));
-        // zed_camera.launch -> zed_state_publisher
-        broadcaster.sendTransform(StampedTransform(Transform(Quaternion(0, 0, 0, 1), 
                                                              Vector3(0.16, 0.085, 0.02)),
                                                              ros::Time::now(),
                                                              "base_link", "zed_description"));
