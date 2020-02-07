@@ -7,7 +7,7 @@
 
     <group ns="$(arg zed_ns)">
         <include file="$(find zed_wrapper)/launch/zed_camera.launch">
-            <arg name="zed_node_name"       value="$(arg zed_node_name)" />
+            <arg name="node_name"   value="$(arg zed_node_name)" />
             <arg name="camera_model"    value="zedm" />
             <arg name="publish_urdf"    value="true" />
         </include>

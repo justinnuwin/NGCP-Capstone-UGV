@@ -6,10 +6,10 @@
     <joint name="zed_joint" type="fixed">
         <origin xyz="0.16 0.085 0.02" rpy="0 0 0"/>
         <parent link="base_link"/>
-        <child link="zed_description"/>
+        <child link="zed_camera_center"/>
     </joint>
 
-    <link name="zed_description"/>
+    <link name="zed_camera_center"/>
 
     <joint name="lidar_joint" type="fixed">
         <origin xyz="0.105 -0.105 0.03" rpy="0 0 0"/>
@@ -21,7 +21,7 @@
 
     <joint name="px4_joint" type="fixed">
         <!-- TODO: Check rotation -->
-        <origin xyz="-0.08 0 0" rpy="0 0 -1.5707963267"/>
+        <origin xyz="-0.08 0 0" rpy="0 0 1.5707963267"/>
         <parent link="base_link"/>
         <child link="px4_frame"/>
     </joint>
