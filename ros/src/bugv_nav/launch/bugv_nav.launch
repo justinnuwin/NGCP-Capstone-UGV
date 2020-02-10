@@ -1,0 +1,7 @@
+<?xml version="1.0"?>
+<launch>
+    <include file="$(find mavros)/launch/px4.launch" >
+    </include>
+
+    <node name="bugv_nav" pkg="bugv_nav" type="offboard_px4" />
+</launch>
