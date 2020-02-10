@@ -3,5 +3,5 @@
     <include file="$(find mavros)/launch/px4.launch" >
     </include>
 
-    <node name="bugv_nav" pkg="bugv_nav" type="offboard_px4" />
+    <node name="manual_rover" pkg="bugv_nav" type="manual_rover" />
 </launch>

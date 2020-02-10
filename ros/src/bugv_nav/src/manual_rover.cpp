@@ -1,3 +1,6 @@
+// Originally sourced from https://dev.px4.io/v1.9.0/en/ros/mavros_offboard.html
+// Our PX4 uses the APM rover stack instead therefore: OFFBOARD -> MANUAL
+
 #include <ros/ros.h>
 #include <geometry_msgs/PoseStamped.h>
 #include <mavros_msgs/CommandBool.h>
@@ -45,7 +48,7 @@ int main(int argc, char **argv)
     }
 
     mavros_msgs::SetMode offb_set_mode;
-    offb_set_mode.request.custom_mode = "OFFBOARD";
+    offb_set_mode.request.custom_mode = "MANUAL";
 
     mavros_msgs::CommandBool arm_cmd;
     arm_cmd.request.value = true;
@@ -53,11 +56,11 @@ int main(int argc, char **argv)
     ros::Time last_request = ros::Time::now();
 
     while(ros::ok()){
-        if( current_state.mode != "OFFBOARD" &&
+        if( current_state.mode != "MANUAL" &&
             (ros::Time::now() - last_request > ros::Duration(5.0))){
             if( set_mode_client.call(offb_set_mode) &&
                 offb_set_mode.response.mode_sent){
-                ROS_INFO("Offboard enabled");
+                ROS_INFO("Manual mode enabled");
             }
             last_request = ros::Time::now();
         } else {

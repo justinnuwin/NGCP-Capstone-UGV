@@ -11,5 +11,5 @@ include_directories(
   ${catkin_INCLUDE_DIRS}
 )
 
-add_executable(offboard_px4 src/offboard_px4.cpp)
-target_link_libraries(offboard_px4 ${catkin_LIBRARIES})
+add_executable(manual_rover src/manual_rover.cpp)
+target_link_libraries(manual_rover ${catkin_LIBRARIES})
