@@ -42,10 +42,10 @@
       <arg name="camera_info_topic"       	value="/$(arg zed_ns)/$(arg zed_node_name)/rgb/camera_info" />
       <arg name="depth_camera_info_topic" 	value="/$(arg zed_ns)/$(arg zed_node_name)/depth/camera_info" />
       <arg name="subscribe_scan"                value="true" />
-      <arg name="scan_topic"                    value="/$(arg rplidar_ns)/$(arg rplidar_node_name)/scan" />
+      <arg name="scan_topic"                    value="/$(arg rplidar_ns)/scan" />
       <arg name="frame_id"                      value="base_link" />
       <arg name="approx_sync"                   value="true" />
-      <arg name="visual_odometry"               value="false" />
+      <arg name="visual_odometry"               value="true" />
       <arg name="odom_topic"                    value="/$(arg zed_ns)/$(arg zed_node_name)/odom" />
       <arg name="rviz"                          value="true" />
     </include>
