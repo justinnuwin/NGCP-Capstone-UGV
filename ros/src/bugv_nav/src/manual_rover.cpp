@@ -6,6 +6,7 @@
 #include <mavros_msgs/CommandBool.h>
 #include <mavros_msgs/SetMode.h>
 #include <mavros_msgs/State.h>
+#include <mavros_msgs/OverrideRCIn.h>
 
 mavros_msgs::State current_state;
 void state_cb(const mavros_msgs::State::ConstPtr& msg){
@@ -25,6 +26,8 @@ int main(int argc, char **argv)
             ("mavros/cmd/arming");
     ros::ServiceClient set_mode_client = nh.serviceClient<mavros_msgs::SetMode>
             ("mavros/set_mode");
+    ros::Publisher override_rc = nh.advertise<mavros_msgs::OverrideRCIn>
+            ("mavros/rc/override", 10);
 
     //the setpoint publishing rate MUST be faster than 2Hz
     ros::Rate rate(20.0);
@@ -75,6 +78,13 @@ int main(int argc, char **argv)
         }
 
         local_pos_pub.publish(pose);
+
+
+
+        mavros_msgs::OverrideRCIn rc;
+        rc.channels[2] = 1580;
+        override_rc.publish(rc);
+
 
         ros::spinOnce();
         rate.sleep();
