@@ -3,11 +3,15 @@
 <launch>
 
    <master auto="start"/>
- <!-- Run the map server --> 
- <!--<node name="map_server" pkg="map_server" type="map_server" args="$(find my_map_package)/my_map.pgm my_map_resolution"/> -->
 
  <!--- Run AMCL --> 
     <include file="$(find amcl)/examples/amcl_omni.launch" />
+
+<group ns="planner">
+    <remap from="openni_points" to="/planner_cloud"/>
+    <remap from="base_scan" to="/base_scan"/>
+    <remap from="map" to="/rtabmap/proj_map"/>
+    <remap from="move_base_simple/goal" to="/planner_goal"/>
 
    <node pkg="move_base" type="move_base" respawn="false" name="move_base" output="screen">
     <rosparam file="$(find bugv_2dnav)/costmap_common_params.yaml" command="load" ns="global_costmap" /> 
@@ -17,4 +21,5 @@
     <rosparam file="$(find bugv_2dnav)/base_local_planner_params.yaml" command="load" />
  </node>
 
+ </group>
 </launch> 

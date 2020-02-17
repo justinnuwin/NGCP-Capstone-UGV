@@ -1,6 +1,5 @@
 <?xml version="1.0"?>
 
 <launch>
-    <node pkg="bugv_rtab" type="bugv_rtab" name="bugv_rtab" output="screen">
-    </node>
+    <include file="$(find bugv_rtab)/launch/bugv_rtab.launch"></include>
 </launch> 
