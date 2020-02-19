@@ -17,4 +17,6 @@
     -->
 
     <node name="manual_rover" pkg="bugv_nav" type="manual_rover" />
+
+    <!--<include file="$(find bugv_rtab)/launch/bugv_rtab.launch"/>-->
 </launch>
