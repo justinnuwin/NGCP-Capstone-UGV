@@ -1,0 +1,20 @@
+<?xml version="1.0"?>
+<package format="2">
+  <name>bugv</name>
+  <version>1.0.0</version>
+  <description>
+    This does everything!
+  </description>
+
+  <maintainer email="yo@mama.jokes">Yoot</maintainer>
+  <license>MIT</license>
+
+  <url type="website">http://ninjaflex.com</url>
+  <url type="repository">https://github.com/justinnuwin</url>
+
+  <buildtool_depend>catkin</buildtool_depend>  
+
+  <exec_depend>rtabmap</exec_depend>
+  <exec_depend>rtabmap_ros</exec_depend>
+  <exec_depend>zed_wrapper</exec_depend>
+</package>
