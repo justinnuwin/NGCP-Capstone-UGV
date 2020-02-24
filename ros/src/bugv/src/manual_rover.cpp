@@ -8,9 +8,18 @@
 #include <mavros_msgs/State.h>
 #include <mavros_msgs/OverrideRCIn.h>
 
+#include <nav_msgs/OccupancyGrid.h>
+
 mavros_msgs::State current_state;
-void state_cb(const mavros_msgs::State::ConstPtr& msg){
+void state_cb(const mavros_msgs::State::ConstPtr& msg) {
     current_state = *msg;
+}
+
+nav_msgs::OccupancyGrid map;
+void map_cb(const nav_msgs::OccupancyGrid::ConstPtr& msg) {
+    map = *msg;
+    //ROS_WARN_STREAM(ros::message_operations::Printer.stream(msg))
+    ROS_WARN_STREAM("manual_rover: " << msg);
 }
 
 int main(int argc, char **argv)
@@ -28,6 +37,8 @@ int main(int argc, char **argv)
             ("mavros/set_mode");
     ros::Publisher override_rc = nh.advertise<mavros_msgs::OverrideRCIn>
             ("mavros/rc/override", 10);
+    ros::Subscriber map_sub = nh.subscribe<nav_msgs::OccupancyGrid>
+            ("rtabmap/grid_map", 10, map_cb);
 
     //the setpoint publishing rate MUST be faster than 2Hz
     ros::Rate rate(20.0);

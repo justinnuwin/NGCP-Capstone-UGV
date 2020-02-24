@@ -1,8 +1,7 @@
 <?xml version="1.0"?>
 <launch>
     <include file="$(find mavros)/launch/apm.launch"/>
-    <!--
-    <include file="$(find mavros)/launch/node.launch">
+    <!--<include file="$(find mavros)/launch/node.launch">
 		<arg name="pluginlists_yaml" value="$(find bugv_nav)/launch/apm_pluginlists.yaml" />
 		<arg name="config_yaml" value="$(find bugv_nav)/launch/apm_config.yaml" />
 
@@ -13,10 +12,7 @@
 		<arg name="log_output" value="$(arg log_output)" />
 		<arg name="fcu_protocol" value="$(arg fcu_protocol)" />
 		<arg name="respawn_mavros" default="$(arg respawn_mavros)" />
-	</include>
-    -->
+	</include>-->
 
-    <node name="manual_rover" pkg="bugv_nav" type="manual_rover" />
-
-    <!--<include file="$(find bugv_rtab)/launch/bugv_rtab.launch"/>-->
+    <node name="manual_rover" pkg="bugv" type="manual_rover" />
 </launch>

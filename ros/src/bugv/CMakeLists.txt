@@ -1,10 +1,16 @@
 cmake_minimum_required(VERSION 2.8.7)
-
 project(bugv)
 
-find_package(catkin REQUIRED)
+find_package(catkin REQUIRED COMPONENTS mavros)
 
 catkin_package()
+
+include_directories(
+  ${catkin_INCLUDE_DIRS}
+)
+
+add_executable(manual_rover src/manual_rover.cpp)
+target_link_libraries(manual_rover ${catkin_LIBRARIES})
 
 #Add all files in subdirectories of the project in
 # a dummy_target so qtcreator have access to all files

@@ -15,6 +15,7 @@
     <include file="$(find bugv)/launch/rplidar_init.launch"/>
  
     <!-- MavLink to PX4 -->
+    <include file="$(find bugv)/launch/pixhawk_init.launch"/>
  
     <!-- URDF + tf -->
     <!--<include file="$(find bugv_tf)/launch/bugv_tf.launch" />-->
