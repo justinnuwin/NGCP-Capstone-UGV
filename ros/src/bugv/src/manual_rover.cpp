@@ -19,7 +19,7 @@ nav_msgs::OccupancyGrid map;
 void map_cb(const nav_msgs::OccupancyGrid::ConstPtr& msg) {
     map = *msg;
     //ROS_WARN_STREAM(ros::message_operations::Printer.stream(msg))
-    ROS_WARN_STREAM("manual_rover: " << msg);
+    ROS_WARN_STREAM("manual_rover: " << map);
 }
 
 int main(int argc, char **argv)
