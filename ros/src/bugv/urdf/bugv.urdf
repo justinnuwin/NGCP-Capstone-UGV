@@ -12,7 +12,7 @@
     <link name="zed_camera_center"/>
 
     <joint name="lidar_joint" type="fixed">
-        <origin xyz="0.105 -0.105 0.03" rpy="0 0 0"/>
+        <origin xyz="0.105 -0.105 0.03" rpy="0 0 3.1415926536"/>
         <parent link="base_link"/>
         <child link="lidar_frame"/>
     </joint>

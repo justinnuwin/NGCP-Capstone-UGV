@@ -1,6 +1,7 @@
 <?xml version="1.0"?>
 <launch>
-    <arg name="zed_topic" value="/zed/zed_node"/>
+    <arg name="zed_topic"       value="/zed/zed_node"/>
+    <arg name="combined_rviz"   default="false"/>
   
     <include file="$(find rtabmap_ros)/launch/rtabmap.launch">
       <arg name="rtabmap_args"              value="--delete_db_on_start" />
@@ -14,6 +15,7 @@
       <arg name="approx_sync"               value="true" />
       <arg name="visual_odometry"           value="true" />
       <arg name="odom_topic"                value="$(arg zed_topic)/odom" />
-      <arg name="rviz"                      value="true" />
+      <arg if="$(arg combined_rviz)"        name="rviz"    value="false" />
+      <arg unless="$(arg combined_rviz)"    name="rviz"    value="true" />
     </include>
 </launch>
