@@ -1,6 +1,6 @@
 #!/bin/bash
 
-source ../devel/setup.bash
+source ../ros/devel/setup.bash
 
 function usage {
     echo "usage: mavparam.sh command [filename]"
