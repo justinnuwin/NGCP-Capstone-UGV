@@ -40,4 +40,6 @@
     <node if="$(arg combined_rviz)" pkg="rviz" type="rviz" name="rviz"
       args="-d $(find bugv)/rviz/bugv_rtabmap_zedm_rplidar.rviz" />
  
+    <!-- bugv Logic -->
+    <node name="bugv_logic" pkg="bugv" type="bugv_logic" />
 </launch>

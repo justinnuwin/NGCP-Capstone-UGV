@@ -19,12 +19,11 @@ nav_msgs::OccupancyGrid map;
 void map_cb(const nav_msgs::OccupancyGrid::ConstPtr& msg) {
     map = *msg;
     //ROS_WARN_STREAM(ros::message_operations::Printer.stream(msg))
-    ROS_WARN_STREAM("manual_rover: " << map);
+    //ROS_WARN_STREAM("manual_rover: " << map);
 }
 
-int main(int argc, char **argv)
-{
-    ros::init(argc, argv, "offb_node");
+int main(int argc, char **argv) {
+    ros::init(argc, argv, "bugv_logic");
     ros::NodeHandle nh;
 
     ros::Subscriber state_sub = nh.subscribe<mavros_msgs::State>
@@ -55,14 +54,16 @@ int main(int argc, char **argv)
     pose.pose.position.z = 2;
 
     //send a few setpoints before starting
+    /*
     for(int i = 100; ros::ok() && i > 0; --i){
         local_pos_pub.publish(pose);
         ros::spinOnce();
         rate.sleep();
     }
+    */
 
-    mavros_msgs::SetMode offb_set_mode;
-    offb_set_mode.request.custom_mode = "MANUAL";
+    mavros_msgs::SetMode set_mode;
+    set_mode.request.custom_mode = "AUTO";
 
     mavros_msgs::CommandBool arm_cmd;
     arm_cmd.request.value = true;
@@ -70,11 +71,11 @@ int main(int argc, char **argv)
     ros::Time last_request = ros::Time::now();
 
     while(ros::ok()){
-        if( current_state.mode != "MANUAL" &&
+        if(current_state.mode != "AUTO" &&
             (ros::Time::now() - last_request > ros::Duration(5.0))){
-            if( set_mode_client.call(offb_set_mode) &&
-                offb_set_mode.response.mode_sent){
-                ROS_INFO("Manual mode enabled");
+            if( set_mode_client.call(set_mode) &&
+                set_mode.response.mode_sent){
+                ROS_INFO("Auto mode enabled");
             }
             last_request = ros::Time::now();
         } else {
@@ -103,3 +104,5 @@ int main(int argc, char **argv)
 
     return 0;
 }
+
+

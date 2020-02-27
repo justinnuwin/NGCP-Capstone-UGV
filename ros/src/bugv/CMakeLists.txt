@@ -9,8 +9,8 @@ include_directories(
   ${catkin_INCLUDE_DIRS}
 )
 
-add_executable(manual_rover src/manual_rover.cpp)
-target_link_libraries(manual_rover ${catkin_LIBRARIES})
+add_executable(bugv_logic src/bugv_logic.cpp)
+target_link_libraries(bugv_logic ${catkin_LIBRARIES})
 
 #Add all files in subdirectories of the project in
 # a dummy_target so qtcreator have access to all files

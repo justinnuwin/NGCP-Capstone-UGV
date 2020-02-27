@@ -13,6 +13,4 @@
 		<arg name="fcu_protocol" value="$(arg fcu_protocol)" />
 		<arg name="respawn_mavros" default="$(arg respawn_mavros)" />
 	</include>-->
-
-    <node name="manual_rover" pkg="bugv" type="manual_rover" />
 </launch>
