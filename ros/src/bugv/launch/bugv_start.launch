@@ -15,10 +15,10 @@
     <include file="$(find bugv)/launch/rplidar_init.launch"/>
  
     <!-- MavLink to PX4 -->
-    <include file="$(find bugv)/launch/pixhawk_init.launch"/>
+    <!--<include file="$(find bugv)/launch/pixhawk_init.launch"/>-->
  
     <!-- URDF + tf -->
-    <!--<include file="$(find bugv_tf)/launch/bugv_tf.launch" />-->
+    <include file="$(find bugv_tf)/launch/bugv_tf.launch" />
     <param name="bugv_description" textfile="$(find bugv)/urdf/bugv.urdf" />
     <node name="bugv_state_publisher" pkg="robot_state_publisher" type="state_publisher">
         <remap from="robot_description" to="bugv_description" />
@@ -28,13 +28,9 @@
     <include file="$(find bugv)/launch/rtabmap.launch">
         <!--<arg name="input_odom" value="$(arg input_odom)"/>-->
       <arg name="combined_rviz"       value="$(arg combined_rviz)"/>
-    </include>
+  </include>
  
     <!-- Use darknet YOLO? -->
- 
-    <!-- SUBSCRIBER -->
-    <!--<node pkg="turtlebot3_slam_3d" type="detection_collector.py"
-          name="detection_collector" output="screen"/>-->
  
     <!-- RVIZ -->
     <node if="$(arg combined_rviz)" pkg="rviz" type="rviz" name="rviz"

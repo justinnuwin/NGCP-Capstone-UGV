@@ -9,7 +9,7 @@ include_directories(
   ${catkin_INCLUDE_DIRS}
 )
 
-add_executable(bugv_logic src/bugv_logic.cpp)
+add_executable(bugv_logic src/bugv_logic.cpp src/bugv_control.cpp)
 target_link_libraries(bugv_logic ${catkin_LIBRARIES})
 
 #Add all files in subdirectories of the project in
