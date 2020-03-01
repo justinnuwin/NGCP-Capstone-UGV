@@ -17,7 +17,7 @@
         <arg name="frame_id"                  value="base_link" />
         <arg name="approx_sync"               value="$(arg approx_sync)" />
         <arg name="visual_odometry"           value="true" />
-        <arg name="odom_topic"                value="$(arg zed_topic)/odom" />
+        <arg name="odom_topic"                value="/odom" />  <!-- zedm param publish_tf -->
         <arg name="rviz"                      value="false" />
         <arg name="rtabmapviz"                value="false" />
     </include>
