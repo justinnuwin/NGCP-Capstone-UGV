@@ -26,9 +26,9 @@
  
     <!-- RTABMAP -->
     <include file="$(find bugv)/launch/rtabmap.launch">
-        <!--<arg name="input_odom" value="$(arg input_odom)"/>-->
-      <arg name="rviz"       value="$(arg rviz)"/>
-  </include>
+        <arg name="rviz"                value="$(arg rviz)"/>
+        <arg name="obstacle_detection"  value="true"/>
+    </include>
  
     <!-- Use darknet YOLO? -->
  
