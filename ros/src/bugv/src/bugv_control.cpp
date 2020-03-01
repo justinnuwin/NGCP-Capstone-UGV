@@ -1,4 +1,5 @@
 #include "bugv_control.h"
+
 #include <geometry_msgs/PoseStamped.h>
 #include <mavros_msgs/CommandBool.h>
 #include <mavros_msgs/SetMode.h>
@@ -6,20 +7,13 @@
 #include <mavros_msgs/OverrideRCIn.h>
 
 mavros_msgs::State current_state;
-ros::ServiceClient set_mode_client;
-ros::ServiceClient arming_client;
-ros::Publisher override_rc;
-
-ros::Subscriber state_sub;
-ros::Publisher local_pos_pub;
-
-ros::Rate r(20);
-
 void state_cb(const mavros_msgs::State::ConstPtr& msg) {
     current_state = *msg;
 }
 
-void mavros_client_init(ros::NodeHandle nh) {
+BugvControl::BugvControl(ros::NodeHandle nh) {
+    ros::Rate r(20);
+
     state_sub = nh.subscribe<mavros_msgs::State>
             ("mavros/state", 10, state_cb);
     local_pos_pub = nh.advertise<geometry_msgs::PoseStamped>
@@ -39,19 +33,18 @@ void mavros_client_init(ros::NodeHandle nh) {
     geometry_msgs::PoseStamped pose;
     pose.pose.position.x = 0;
     pose.pose.position.y = 0;
-    pose.pose.position.z = 2;
+    pose.pose.position.z = 0;
 
     //send a few setpoints before starting
     for(int i = 100; ros::ok() && i > 0; --i){
         local_pos_pub.publish(pose);
         ros::spinOnce();
         r.sleep();
+        pose.pose.position.x += 1;
     }
-
-    set_mode("GUIDED", true);
 }
 
-void set_mode(std::string mode, bool armed, float rate) {
+void BugvControl::set_mode(std::string mode, bool armed, float rate) {
     mavros_msgs::SetMode set_mode;
     set_mode.request.custom_mode = mode;
 
@@ -79,6 +72,7 @@ void set_mode(std::string mode, bool armed, float rate) {
     }
 }
 
+/*
 mavros_msgs::OverrideRCIn rc;
 void test_rc() {
     int test = 0;
@@ -96,3 +90,4 @@ void test_rc() {
         test++;
     }
 }
+*/
