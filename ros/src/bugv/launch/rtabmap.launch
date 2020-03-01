@@ -1,21 +1,35 @@
 <?xml version="1.0"?>
 <launch>
+    <arg name="rviz"            default="true"/>
+
     <arg name="zed_topic"       value="/zed/zed_node"/>
-    <arg name="combined_rviz"   default="false"/>
+    <arg name="approx_sync"     value="true"/>
   
     <include file="$(find rtabmap_ros)/launch/rtabmap.launch">
-      <arg name="rtabmap_args"              value="--delete_db_on_start" />
-      <arg name="rgb_topic"               	value="$(arg zed_topic)/rgb/image_rect_color" />
-      <arg name="depth_topic"             	value="$(arg zed_topic)/depth/depth_registered" />
-      <arg name="camera_info_topic"       	value="$(arg zed_topic)/rgb/camera_info" />
-      <arg name="depth_camera_info_topic" 	value="$(arg zed_topic)/depth/camera_info" />
-      <arg name="subscribe_scan"            value="true" />
-      <arg name="scan_topic"                value="/rplidar/scan"/>
-      <arg name="frame_id"                  value="base_link" />
-      <arg name="approx_sync"               value="true" />
-      <arg name="visual_odometry"           value="true" />
-      <arg name="odom_topic"                value="$(arg zed_topic)/odom" />
-      <arg if="$(arg combined_rviz)"        name="rviz"    value="false" />
-      <arg unless="$(arg combined_rviz)"    name="rviz"    value="true" />
+        <arg name="rtabmap_args"              value="--delete_db_on_start" />
+        <arg name="rgb_topic"                 value="$(arg zed_topic)/rgb/image_rect_color" />
+        <arg name="depth_topic"               value="$(arg zed_topic)/depth/depth_registered" />
+        <arg name="camera_info_topic"         value="$(arg zed_topic)/rgb/camera_info" />
+        <arg name="depth_camera_info_topic"   value="$(arg zed_topic)/depth/camera_info" />
+        <arg name="subscribe_scan"            value="true" />
+        <arg name="scan_topic"                value="/rplidar/scan"/>
+        <arg name="frame_id"                  value="base_link" />
+        <arg name="approx_sync"               value="$(arg approx_sync)" />
+        <arg name="visual_odometry"           value="true" />
+        <arg name="odom_topic"                value="$(arg zed_topic)/odom" />
+        <arg name="rviz"                      value="false" />
+        <arg name="rtabmapviz"                value="false" />
     </include>
+
+    <node if="$(arg rviz)" pkg="nodelet" type="nodelet" name="points_xyzrgb" args="standalone rtabmap_ros/point_cloud_xyzrgb" output="screen">
+        <remap from="rgb/image"         to="$(arg zed_topic)/rgb/image_rect_color"/>
+        <remap from="depth/image"       to="$(arg zed_topic)/depth/depth_registered"/>
+        <remap from="rgb/camera_info"   to="$(arg zed_topic)/rgb/camera_info"/>
+        <!--<remap from="rgbd_image"        to="$(arg rgbd_topic_relay)"/>-->
+        <remap from="cloud"             to="voxel_cloud" />
+
+        <param name="decimation"  type="double" value="4"/>
+        <param name="voxel_size"  type="double" value="0.0"/>
+        <param name="approx_sync" type="bool"   value="$(arg approx_sync)"/>
+    </node>
 </launch>

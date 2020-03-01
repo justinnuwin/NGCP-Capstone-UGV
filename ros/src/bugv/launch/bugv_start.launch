@@ -1,7 +1,7 @@
 <?xml version="1.0"?>
 <launch>
     <arg name="visual_odom"     value="true" doc="Use ZED visual odometry"/>
-    <arg name="combined_rviz"            value="false"/>
+    <arg name="rviz"   value="true"/>
  
     <arg     if="$(arg visual_odom)" name="input_odom"  default="/zed/zed_node/odom"/>
     <arg unless="$(arg visual_odom)" name="input_odom"  default="/odom"/>
@@ -27,14 +27,14 @@
     <!-- RTABMAP -->
     <include file="$(find bugv)/launch/rtabmap.launch">
         <!--<arg name="input_odom" value="$(arg input_odom)"/>-->
-      <arg name="combined_rviz"       value="$(arg combined_rviz)"/>
+      <arg name="rviz"       value="$(arg rviz)"/>
   </include>
  
     <!-- Use darknet YOLO? -->
  
     <!-- RVIZ -->
-    <node if="$(arg combined_rviz)" pkg="rviz" type="rviz" name="rviz"
-      args="-d $(find bugv)/rviz/bugv_rtabmap_zedm_rplidar.rviz" />
+    <node if="$(arg rviz)" pkg="rviz" type="rviz" name="rviz"
+        args="-d $(find bugv)/rviz/bugv_rtabmap_zedm_rplidar.rviz" />
  
     <!-- bugv Logic -->
     <node name="bugv_logic" pkg="bugv" type="bugv_logic" />
