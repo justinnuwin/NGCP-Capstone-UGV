@@ -1,5 +1,0 @@
-<?xml version="1.0"?>
-<launch>
-    <node name="broadcaster" pkg="bugv_tf" type="tf_broadcaster" output="screen" />
-    <node name="listener" pkg="bugv_tf" type="tf_listener" output="screen" />
-</launch>

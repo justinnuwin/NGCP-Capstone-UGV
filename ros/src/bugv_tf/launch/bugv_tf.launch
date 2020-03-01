@@ -1,4 +1,0 @@
-<?xml version="1.0"?>
-<launch>
-    <node name="bugv_tf" pkg="bugv_tf" type="tf_broadcaster" />
-</launch>
