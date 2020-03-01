@@ -7,6 +7,8 @@
 #include "bugv_control.h"
 #include "bugv_nav.h"
 
+BugvNav nav;
+
 nav_msgs::OccupancyGrid map;
 void map_cb(const nav_msgs::OccupancyGrid::ConstPtr& msg) {
     map = *msg;
@@ -26,6 +28,7 @@ int main(int argc, char **argv) {
     signal(SIGINT, clean_quit);
 
     ros::NodeHandle nh;
+    nav = BugvNav(nh);
     BugvControl control(nh);
     ros::Subscriber map_sub = nh.subscribe<nav_msgs::OccupancyGrid>
             ("rtabmap/grid_map", 10, map_cb);
@@ -33,7 +36,6 @@ int main(int argc, char **argv) {
     ros::Rate rate(1);
     while (ros::ok()) {
         // local_pos_pub.publish(pose);     // mavros test
-        BugvNav nav(nh);
 
         ros::spinOnce();
         rate.sleep();
