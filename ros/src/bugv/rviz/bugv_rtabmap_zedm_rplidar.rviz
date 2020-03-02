@@ -3,8 +3,7 @@ Panels:
     Help Height: 78
     Name: Displays
     Property Tree Widget:
-      Expanded:
-        - /TF1/Frames1
+      Expanded: ~
       Splitter Ratio: 0.4055555462837219
     Tree Height: 550
   - Class: rviz/Selection
@@ -131,7 +130,7 @@ Visualization Manager:
         Min Value: -10
         Value: true
       Axis: Z
-      Channel Name: x
+      Channel Name: z
       Class: rviz/PointCloud2
       Color: 255; 255; 255
       Color Transformer: Intensity
@@ -139,9 +138,9 @@ Visualization Manager:
       Enabled: true
       Invert Rainbow: false
       Max Color: 0; 50; 0
-      Max Intensity: 3.677138090133667
+      Max Intensity: 0
       Min Color: 0; 255; 0
-      Min Intensity: -1.172861933708191
+      Min Intensity: 0
       Name: Unoccupied
       Position Transformer: XYZ
       Queue Size: 10
@@ -165,13 +164,13 @@ Visualization Manager:
       Class: rviz/PointCloud2
       Color: 255; 255; 255
       Color Transformer: Intensity
-      Decay Time: 0
+      Decay Time: 0.5
       Enabled: true
       Invert Rainbow: false
       Max Color: 255; 0; 0
-      Max Intensity: 4.761912822723389
+      Max Intensity: -999999
       Min Color: 150; 0; 0
-      Min Intensity: 0.38819703459739685
+      Min Intensity: 999999
       Name: Obstacles
       Position Transformer: XYZ
       Queue Size: 10
@@ -198,10 +197,12 @@ Visualization Manager:
       Enabled: true
       Frame Timeout: 15
       Frames:
-        All Enabled: false
+        All Enabled: true
         base_link:
           Value: true
         base_link_frd:
+          Value: true
+        base_plate:
           Value: true
         lidar_frame:
           Value: true
@@ -225,7 +226,7 @@ Visualization Manager:
           Value: true
         zed_right_camera_optical_frame:
           Value: true
-      Marker Scale: 1
+      Marker Scale: 0.5
       Name: TF
       Show Arrows: true
       Show Axes: true
@@ -238,17 +239,18 @@ Visualization Manager:
             base_link:
               base_link_frd:
                 {}
-              lidar_frame:
-                {}
-              px4_frame:
-                {}
-              zed_camera_center:
-                zed_left_camera_frame:
-                  zed_left_camera_optical_frame:
-                    {}
-                zed_right_camera_frame:
-                  zed_right_camera_optical_frame:
-                    {}
+              base_plate:
+                lidar_frame:
+                  {}
+                px4_frame:
+                  {}
+                zed_camera_center:
+                  zed_left_camera_frame:
+                    zed_left_camera_optical_frame:
+                      {}
+                  zed_right_camera_frame:
+                    zed_right_camera_optical_frame:
+                      {}
             odom_ned:
               {}
       Update Interval: 0
@@ -341,6 +343,15 @@ Visualization Manager:
       Topic: /bugv/path_plan
       Unreliable: false
       Value: true
+    - Class: rviz/Marker
+      Enabled: true
+      Marker Topic: /bugv/markers
+      Name: Markers
+      Namespaces:
+        goal: true
+        map: true
+      Queue Size: 100
+      Value: true
   Enabled: true
   Global Options:
     Background Color: 48; 48; 48
@@ -365,25 +376,25 @@ Visualization Manager:
   Views:
     Current:
       Class: rviz/Orbit
-      Distance: 7.740769386291504
+      Distance: 4.0850510597229
       Enable Stereo Rendering:
         Stereo Eye Separation: 0.05999999865889549
         Stereo Focal Distance: 1
         Swap Stereo Eyes: false
         Value: false
       Focal Point:
-        X: 1.1457200050354004
-        Y: 0.16809700429439545
-        Z: -1.1313600540161133
+        X: 1.6594308614730835
+        Y: -0.42343348264694214
+        Z: -0.6413010954856873
       Focal Shape Fixed Size: true
       Focal Shape Size: 0.05000000074505806
       Invert Z Axis: false
       Name: Current View
       Near Clip Distance: 0.009999999776482582
-      Pitch: 0.5197967290878296
+      Pitch: 0.47479671239852905
       Target Frame: base_link
       Value: Orbit (rviz)
-      Yaw: 3.344181537628174
+      Yaw: 2.067361831665039
     Saved: ~
 Window Geometry:
   Displays:
