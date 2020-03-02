@@ -168,9 +168,9 @@ Visualization Manager:
       Enabled: true
       Invert Rainbow: false
       Max Color: 255; 0; 0
-      Max Intensity: -999999
+      Max Intensity: 2.038594961166382
       Min Color: 150; 0; 0
-      Min Intensity: 999999
+      Min Intensity: 0.5640562772750854
       Name: Obstacles
       Position Transformer: XYZ
       Queue Size: 10
@@ -323,13 +323,13 @@ Visualization Manager:
     - Alpha: 1
       Buffer Length: 1
       Class: rviz/Path
-      Color: 0; 255; 0
+      Color: 0; 255; 255
       Enabled: true
       Head Diameter: 0.30000001192092896
       Head Length: 0.20000000298023224
       Length: 0.30000001192092896
-      Line Style: Lines
-      Line Width: 0.029999999329447746
+      Line Style: Billboards
+      Line Width: 0.03500000014901161
       Name: Planned Path
       Offset:
         X: 0
@@ -340,7 +340,7 @@ Visualization Manager:
       Radius: 0.029999999329447746
       Shaft Diameter: 0.10000000149011612
       Shaft Length: 0.10000000149011612
-      Topic: /bugv/path_plan
+      Topic: /local_plan
       Unreliable: false
       Value: true
     - Class: rviz/Marker
@@ -348,8 +348,8 @@ Visualization Manager:
       Marker Topic: /bugv/markers
       Name: Markers
       Namespaces:
+        bugv: true
         goal: true
-        map: true
       Queue Size: 100
       Value: true
   Enabled: true
@@ -376,7 +376,7 @@ Visualization Manager:
   Views:
     Current:
       Class: rviz/Orbit
-      Distance: 4.0850510597229
+      Distance: 5.4948225021362305
       Enable Stereo Rendering:
         Stereo Eye Separation: 0.05999999865889549
         Stereo Focal Distance: 1
@@ -391,10 +391,10 @@ Visualization Manager:
       Invert Z Axis: false
       Name: Current View
       Near Clip Distance: 0.009999999776482582
-      Pitch: 0.47479671239852905
+      Pitch: 0.50479656457901
       Target Frame: base_link
       Value: Orbit (rviz)
-      Yaw: 2.067361831665039
+      Yaw: 2.92236065864563
     Saved: ~
 Window Geometry:
   Displays:

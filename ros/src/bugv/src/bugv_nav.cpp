@@ -7,7 +7,6 @@
 
 // Marker List:
 // - bugv/0: Current Position
-// - map/0: Origin
 // - goal/0: Goal
 
 extern BugvNav *nav;
@@ -19,6 +18,26 @@ void odom_cb(const nav_msgs::Odometry::ConstPtr& msg) {
     nav->update_path_history(path_step);
     nav->planner.visualize();
     //nav.teb_visual->publishViaPoints(via_points);
+
+    visualization_msgs::Marker marker;
+    marker.header.frame_id = "map";
+    marker.header.stamp = ros::Time();
+    marker.ns = "bugv";
+    marker.id = 0;
+    marker.type = visualization_msgs::Marker::ARROW;
+    marker.action = visualization_msgs::Marker::ADD;
+    marker.pose = msg->pose.pose;
+    // Offset to put the arrow in the middle of the model
+    marker.pose.position.z += 0.075;
+    marker.pose.position.x -= 0.2;
+    marker.scale.x = 0.5;
+    marker.scale.y = 0.05;
+    marker.scale.z = 0.05;
+    marker.color.a = 1.0;
+    marker.color.r = 0.0;
+    marker.color.g = 1.0;
+    marker.color.b = 0.0;
+    nav->marker_pub.publish(marker);
 }
 
 void map_cb(const costmap_converter::ObstacleArrayMsg::ConstPtr& msg) {
@@ -58,9 +77,10 @@ BugvNav::BugvNav(ros::NodeHandle &nh, teb_local_planner::PoseSE2 start, teb_loca
     path_plan_pub = nh.advertise<nav_msgs::Path> ("bugv/path_plan", 10);
     marker_pub = nh.advertise<visualization_msgs::Marker> ("bugv/markers", 10);
     odom_sub = nh.subscribe<nav_msgs::Odometry> ("/odom", 10, odom_cb);
-    map_sub = nh.subscribe<costmap_converter::ObstacleArrayMsg> ("/costmap_obstacles", 10, map_cb);
+    map_sub = nh.subscribe<costmap_converter::ObstacleArrayMsg> ("costmap_converter/costmap_obstacles", 10, map_cb);
 
-    // teb_config.loadRosParamFromNodeHandle(nh);
+    teb_config.loadRosParamFromNodeHandle(nh);
+    teb_visual = teb_local_planner::TebVisualizationPtr(new teb_local_planner::TebVisualization(nh, teb_config));
     planner = teb_local_planner::TebOptimalPlanner(teb_config, NULL, boost::make_shared<teb_local_planner::PointRobotFootprint>(), teb_visual, NULL);
     planner.plan(start, goal);
 }
@@ -71,32 +91,9 @@ void BugvNav::update_path_history(geometry_msgs::PoseStamped &current_pose) {
     path_history_pub.publish(path_history);
 }
 
-geometry_msgs::PoseStamped &BugvNav::get_current_pose() {
-    return path_history.poses.back();
-}
-
 void BugvNav::update_path_plan() {
     this->obstacles = obstacles;
     planner.setObstVector(&obst_vector);
-
-    geometry_msgs::PoseStamped &current_pose = get_current_pose();
-    nav_msgs::Path path;
-    std::vector<geometry_msgs::PoseStamped> poses(2);
-    poses.at(0).header = current_pose.header;
-    poses.at(0).pose = current_pose.pose;
-    poses.at(1).header.seq = 1;
-    poses.at(1).header.frame_id = "map";
-    poses.at(1).header.stamp = ros::Time::now();
-    poses.at(1).pose.position.x = 1.5;
-    poses.at(1).pose.position.y = 1;
-    poses.at(1).pose.position.z = 0.1;
-    poses.at(1).pose.orientation.x = 0;
-    poses.at(1).pose.orientation.y = 0;
-    poses.at(1).pose.orientation.z = 0;
-    poses.at(1).pose.orientation.w = 1;
-    path.header = poses.back().header;
-    path.poses = poses;
-    path_plan_pub.publish(path);
 
     visualization_msgs::Marker marker;
     marker.header.frame_id = "map";

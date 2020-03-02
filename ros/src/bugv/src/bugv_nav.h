@@ -35,7 +35,6 @@ class BugvNav {
 
 
         void update_path_history(geometry_msgs::PoseStamped &pose);
-        geometry_msgs::PoseStamped &get_current_pose();
         void update_path_plan();
 };
 
