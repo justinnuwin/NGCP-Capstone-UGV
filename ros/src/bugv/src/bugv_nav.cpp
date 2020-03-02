@@ -4,6 +4,7 @@
 #include <visualization_msgs/Marker.h>
 #include <cstdint>
 #include <teb_local_planner/robot_footprint_model.h>
+#include <geometry_msgs/Point.h>
 
 // Marker List:
 // - bugv/0: Current Position
@@ -79,9 +80,12 @@ BugvNav::BugvNav(ros::NodeHandle &nh, teb_local_planner::PoseSE2 start, teb_loca
     odom_sub = nh.subscribe<nav_msgs::Odometry> ("/odom", 10, odom_cb);
     map_sub = nh.subscribe<costmap_converter::ObstacleArrayMsg> ("costmap_converter/costmap_obstacles", 10, map_cb);
 
-    teb_config.loadRosParamFromNodeHandle(nh);
     teb_visual = teb_local_planner::TebVisualizationPtr(new teb_local_planner::TebVisualization(nh, teb_config));
-    planner = teb_local_planner::TebOptimalPlanner(teb_config, NULL, boost::make_shared<teb_local_planner::PointRobotFootprint>(), teb_visual, NULL);
+    geometry_msgs::Point footprint_start;
+    geometry_msgs::Point footprint_end;
+    footprint_start.x = -0.1;     footprint_start.y = 0.0;
+    footprint_end.x   = 0.4;      footprint_end.y   = 0.0;
+    planner = teb_local_planner::TebOptimalPlanner(teb_config, NULL, boost::make_shared<teb_local_planner::LineRobotFootprint> (footprint_start, footprint_end), teb_visual, NULL);
     planner.plan(start, goal);
 }
 

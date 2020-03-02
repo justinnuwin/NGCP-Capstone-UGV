@@ -33,7 +33,6 @@ class BugvNav {
         costmap_converter::ObstacleArrayMsg obstacles;
         std::vector<teb_local_planner::ObstaclePtr> obst_vector;
 
-
         void update_path_history(geometry_msgs::PoseStamped &pose);
         void update_path_plan();
 };
