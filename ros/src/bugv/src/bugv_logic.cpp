@@ -2,11 +2,13 @@
 #include <string>
 
 #include <ros/ros.h>
+#include <teb_local_planner/pose_se2.h>
 
 #include "bugv_control.h"
 #include "bugv_nav.h"
 
-BugvNav nav;
+
+BugvNav *nav;
 
 void clean_quit(int sig) {
     // set_mode("HOLD", false, 2);
@@ -20,7 +22,8 @@ int main(int argc, char **argv) {
     signal(SIGINT, clean_quit);
 
     ros::NodeHandle nh;
-    nav = BugvNav(nh);
+    BugvNav nav_(nh, teb_local_planner::PoseSE2(0,0,0), teb_local_planner::PoseSE2(1.5,1,0.1));
+    nav = &nav_;
     BugvControl control(nh);
 
     ros::Rate rate(1);

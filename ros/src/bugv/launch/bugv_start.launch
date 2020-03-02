@@ -26,9 +26,12 @@
         <arg name="rviz"                value="$(arg rviz)"/>
         <arg name="obstacle_detection"  value="true"/>
     </include>
- 
-    <!-- Use darknet YOLO? -->
- 
+
+    <!-- Map Converter for Local Planner -->
+    <node pkg="costmap_converter" type="standalone_converter" name="costmap_converter" output="screen">
+        <remap from="/move_base/local_costmap/costmap" to="/rtabmap/grid_prob_map"/>
+    </node>
+
     <!-- RVIZ -->
     <node if="$(arg rviz)" pkg="rviz" type="rviz" name="rviz"
         args="-d $(find bugv)/rviz/bugv_rtabmap_zedm_rplidar.rviz" />

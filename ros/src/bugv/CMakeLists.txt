@@ -1,7 +1,9 @@
 cmake_minimum_required(VERSION 2.8.7)
 project(bugv)
 
-find_package(catkin REQUIRED COMPONENTS mavros)
+find_package(catkin REQUIRED COMPONENTS
+    mavros
+    teb_local_planner)
 
 catkin_package()
 
