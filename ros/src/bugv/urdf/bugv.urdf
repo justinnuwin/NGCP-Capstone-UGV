@@ -3,15 +3,23 @@
 <robot name="bugv">
     <link name="base_link"/>
 
+    <joint name="base_joint" type="fixed">
+        <origin xyz="0 0 0.15" rpy="0 0 0"/>
+        <parent link="base_link"/>
+        <child link="base_plate"/>
+    </joint>
+
+    <link name="base_plate"/>
+
     <joint name="zed_joint" type="fixed">
         <origin xyz="0.16 0.085 0.02" rpy="0 0 0"/>
-        <parent link="base_link"/>
+        <parent link="base_plate"/>
         <child link="zed_camera_center"/>
     </joint>
 
     <joint name="lidar_joint" type="fixed">
         <origin xyz="0.105 -0.105 0.03" rpy="0 0 3.1415926536"/>
-        <parent link="base_link"/>
+        <parent link="base_plate"/>
         <child link="lidar_frame"/>
     </joint>
 
@@ -20,7 +28,7 @@
     <joint name="px4_joint" type="fixed">
         <!-- TODO: Check rotation -->
         <origin xyz="-0.08 0 0" rpy="0 0 1.5707963267"/>
-        <parent link="base_link"/>
+        <parent link="base_plate"/>
         <child link="px4_frame"/>
     </joint>
 
